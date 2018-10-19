@@ -23,6 +23,7 @@ public class Demo1 {
 	public static void main(String[] args) {
 		Outer.Inner oi = new Outer().new Inner();
 		oi.show();
+
 	}
 }
 
@@ -39,4 +40,5 @@ class Outer {
 			System.out.println(Outer.this.num);
 		}
 	}
+
 }

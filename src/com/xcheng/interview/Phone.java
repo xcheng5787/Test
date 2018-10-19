@@ -1,5 +1,5 @@
 package com.xcheng.interview;
 
-public interface phone {
+public interface Phone {
 
 }
