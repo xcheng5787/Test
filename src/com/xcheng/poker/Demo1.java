@@ -2,7 +2,6 @@ package com.xcheng.poker;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class Demo1 {
 	public static void main(String[] args) {
@@ -37,17 +36,74 @@ public class Demo1 {
 		}
 		// 看牌
 		System.out.println(member1);
+		System.out.println(toPoker(member1));
+		System.out.println("=======================");
 		System.out.println(member2);
+		System.out.println(toPoker(member2));
+		System.out.println("=======================");
 		System.out.println(member3);
+		System.out.println(toPoker(member3));
+		System.out.println("=======================");
 		System.out.println(dipai);
 
 	}
 
-	public static ArrayList<String> pokerSort(ArrayList<String> list) {
-		// TODO Auto-generated method stub
-		List<String> newList = new ArrayList<>();
+	public static ArrayList<String> toPoker(ArrayList<String> c) {
+		ArrayList<Cards> cards = new ArrayList<>();
+		for (String s : c) {
+			if (s == "小王") {
+				cards.add(new Cards("♦", 16));
+			} else if (s == "大王") {
+				cards.add(new Cards("♦", 17));
+			} else if (s.charAt(1) == 'A') {
+				cards.add(new Cards(String.valueOf(s.charAt(0)), 14));
+			} else if (s.charAt(1) == '2') {
+				cards.add(new Cards(String.valueOf(s.charAt(0)), 15));
+			} else if (s.charAt(1) == 'J') {
+				cards.add(new Cards(String.valueOf(s.charAt(0)), 11));
+			} else if (s.charAt(1) == 'Q') {
+				cards.add(new Cards(String.valueOf(s.charAt(0)), 12));
+			} else if (s.charAt(1) == 'K') {
+				cards.add(new Cards(String.valueOf(s.charAt(0)), 13));
+			} else {
+				cards.add(new Cards(String.valueOf(s.charAt(0)), Integer.parseInt(s.substring(1))));
+			}
+		}
+		Collections.sort(cards);
+		return toPokerString(cards);
 
-		return null;
+	}
+
+	private static ArrayList<String> toPokerString(ArrayList<Cards> cards) {
+		// TODO Auto-generated method stub
+		ArrayList<String> list = new ArrayList<>();
+		for (Cards c : cards) {
+			if (c.getNum() == 16) {
+				list.add("小王");
+			} else if (c.getNum() == 17) {
+				list.add("大王");
+			} else {
+				list.add(c.getColor() + toNum(c.getNum()));
+			}
+		}
+		return list;
+	}
+
+	private static String toNum(int num) {
+		// TODO Auto-generated method stub
+		if (num == 11) {
+			return "J";
+		} else if (num == 12) {
+			return "Q";
+		} else if (num == 13) {
+			return "K";
+		} else if (num == 14) {
+			return "A";
+		} else if (num == 15) {
+			return "2";
+		} else {
+			return String.valueOf(num);
+		}
 	}
 
 }
